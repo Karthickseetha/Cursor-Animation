@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Snake Cursor Animation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Multiple cursor elements for snake effect -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="cursor-trail"></div>
+    <div class="cursor-trail"></div>
+    <div class="cursor-trail"></div>
+    <div class="cursor-trail"></div>
+    <div class="cursor-trail"></div>
+</body>
+<script>
+                    const cursor = document.querySelector('.cursor');
+                const cursorFollower = document.querySelector('.cursor-follower');
+                const trails = document.querySelectorAll('.cursor-trail');
+
+                document.addEventListener('mousemove', (e) => {
+                    const x = e.clientX;
+                    const y = e.clientY;
+
+                    // Move main cursor and follower
+                    cursor.style.left = `${x}px`;
+                    cursor.style.top = `${y}px`;
+                    cursorFollower.style.left = `${x}px`;
+                    cursorFollower.style.top = `${y}px`;
+
+                    // Snake trail animation with rotation effect
+                    trails.forEach((trail, index) => {
+                        setTimeout(() => {
+                            trail.style.left = `${x}px`;
+                            trail.style.top = `${y}px`;
+                            trail.style.transform = `translate(-50%, -50%) rotate(${index * 45}deg)`; // Add rotation
+                        }, index * 100);  // Delay for trail segments
+                    });
+                });
+
+</script>
+</html>

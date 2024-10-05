@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Base styles for cursor elements */
+.cursor, .cursor-follower, .cursor-trail {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease, rotate 0.2s ease;
+}
+
+/* Main Cursor */
+.cursor {
+    width: 16px;
+    height: 16px;
+    background-color: #00e0ff;
+    box-shadow: 0 0 15px rgba(0, 224, 255, 0.8), 0 0 30px rgba(0, 224, 255, 0.4);
+    animation: pulse 1.5s infinite alternate, colorChange 4s infinite ease-in-out;
+    transform: translate(-50%, -50%);
+}
+
+/* Follower Cursor */
+.cursor-follower {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ff00e0;
+    box-shadow: 0 0 25px rgba(255, 0, 224, 0.6), 0 0 50px rgba(255, 0, 224, 0.3);
+    animation: pulse 2.5s infinite alternate, rotateFollower 3s infinite linear, colorChange 4s infinite ease-in-out;
+    transform: translate(-50%, -50%);
+}
+
+/* Snake Trail */
+.cursor-trail {
+    width: 12px;
+    height: 12px;
+    background-color: #ff00e0;
+    box-shadow: 0 0 20px rgba(255, 0, 224, 0.6), 0 0 40px rgba(255, 0, 224, 0.3);
+    opacity: 0.8;
+    transition: transform 0.2s ease, rotate 0.3s ease;
+    animation: snake-trail 6s infinite, rotateTrail 2s infinite linear, colorChange 4s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.4);
+    }
+}
+
+@keyframes rotateFollower {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateTrail {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        background-color: #00e0ff;
+        border-color: #00e0ff;
+        box-shadow: 0 0 15px rgba(0, 224, 255, 0.8), 0 0 30px rgba(0, 224, 255, 0.4);
+    }
+    25% {
+        background-color: #ff00e0;
+        border-color: #ff00e0;
+        box-shadow: 0 0 20px rgba(255, 0, 224, 0.8), 0 0 40px rgba(255, 0, 224, 0.5);
+    }
+    50% {
+        background-color: #00ff99;
+        border-color: #00ff99;
+        box-shadow: 0 0 20px rgba(0, 255, 153, 0.8), 0 0 40px rgba(0, 255, 153, 0.5);
+    }
+    75% {
+        background-color: #ff9900;
+        border-color: #ff9900;
+        box-shadow: 0 0 20px rgba(255, 153, 0, 0.8), 0 0 40px rgba(255, 153, 0, 0.5);
+    }
+    100% {
+        background-color: #00e0ff;
+        border-color: #00e0ff;
+        box-shadow: 0 0 15px rgba(0, 224, 255, 0.8), 0 0 30px rgba(0, 224, 255, 0.4);
+    }
+}
+
+@keyframes snake-trail {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.4) rotate(360deg);
+    }
+}
+
+/* Hover Effect */
+body:hover .cursor, body:hover .cursor-follower, body:hover .cursor-trail {
+    transform: scale(1.8); /* Enlarges both cursor and follower on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cursor, .cursor-follower, .cursor-trail {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 480px) {
+    .cursor, .cursor-follower, .cursor-trail {
+        transform: scale(0.6);
+    }
+}
